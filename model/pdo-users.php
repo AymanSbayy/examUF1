@@ -30,6 +30,29 @@ function userExistsByEmail($email)
     }
 }
 
+
+//EX5
+function getUserRol($nickname)
+{
+    try{
+        $connexio = getConnection();
+
+        $statement = $connexio->prepare('SELECT Rol FROM users WHERE nickname = :nickname');
+
+        $statement->bindValue(':nickname', $nickname);
+
+        $statement->execute();
+
+        $count = count($statement->fetchAll());
+
+        return ($count > 0);
+    }catch (PDOException $e) 
+    {
+        die("No es pot establir connexió amb la base de dades");
+    }
+}
+
+
 /**
  * Consulta l'existència d'un usuari mitjançant un nickname
  *
@@ -271,6 +294,22 @@ function setResetToken($userId, $resetToken)
         $statement = $connexio->prepare('UPDATE users SET reset_token = :resetToken WHERE id = :userId');
 
         $statement->bindParam('resetToken', $resetToken);
+        $statement->bindParam('userId', $userId, PDO::PARAM_INT);
+
+        $statement->execute();
+    } catch (PDOException $e) {
+        die("No es pot establir connexió amb la base de dades");
+    }
+}
+
+function restPass($userId, $password)
+{
+    try {
+        $connexio = getConnection();
+
+        $statement = $connexio->prepare('UPDATE users SET password = :password WHERE id = :userId');
+
+        $statement->bindParam('password', $password);
         $statement->bindParam('userId', $userId, PDO::PARAM_INT);
 
         $statement->execute();

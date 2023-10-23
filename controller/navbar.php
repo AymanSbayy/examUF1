@@ -3,6 +3,7 @@
 require_once '../model/pdo-users.php';
 require_once '../controller/session.php';
 
+//EX12
     $userId = getSessionUserId();
     
     $anonUser = $userId == 0;
@@ -19,4 +20,4 @@ require_once '../controller/session.php';
     $createActive = $file == "edit" ? "active" : "";
     $passwordActive = $file == "change-password" ? "active" : "";    
 
-    require_once '../view/navbar.view.php';
+    include '../view/navbar.view.php'; //EX2

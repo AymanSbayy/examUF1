@@ -23,5 +23,5 @@ if (empty($article)) {
     $ytId =  getYoutubeVideoId($article['youtube_link']);
     $imagePath = $article['image_path'];
     $filetime = filemtime("../uploads/$imagePath");
-    require_once '../view/article.view.php';
+    include '../view/article.view.php'; //EX2
 }

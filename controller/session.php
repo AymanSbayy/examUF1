@@ -12,12 +12,16 @@ function startSession($email, $keepSession)
     setSessionLifeTime();
     session_start();
     $userId = getUserId($email); 
+    $rol = getUserRol($email); //EX5
     if ($keepSession) {
         $rememberMeToken = bin2hex(random_bytes(16)); 
         setRememberMeToken($userId, $rememberMeToken);
         setcookie("rememberme", $rememberMeToken, 2147483647);
     }
 
+    //EX5
+    if ($rol == "Admin") $_SESSION["Admin"] = $userId;
+    else 
     $_SESSION["userId"] = $userId; 
 }
 

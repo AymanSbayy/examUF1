@@ -14,7 +14,7 @@ require_once 'db-connection.php';
  * 
  * @return array amb tots els articles
  */
-function getPosts($userId, $ndxArticle, $postsPerPage, $orderBy, $searchTerm)
+function getPosts($userId, $ndxArticle, $postsPerPage, $orderBy, $searchTerm) //EX7.1
 {    
     switch ($orderBy) {
         case 'date-asc':
@@ -221,6 +221,23 @@ function updatePost($articleId, $title, $director, $link, $ytLink, $article)
     }
 }
 
+function updateUserHistoric($userid, $value)
+{
+    try {
+        $connexio = getConnection();
+
+        $statement = $connexio->prepare('
+        UPDATE posts SET Historic = :Historic WHERE id = :user_id;');
+
+        $statement->bindParam('user_id', $userid, PDO::PARAM_INT);
+        $statement->bindParam('Historic', $value);
+
+        $statement->execute();
+    } catch (PDOException $e) {
+        die("No es pot establir connexió amb la base de dades");
+    }
+}
+
 /**
  * Estableix una imatge a un article
  *
@@ -295,6 +312,21 @@ function deletePost($articleId)
         $statement = $connexio->prepare('DELETE FROM posts WHERE id = :articleId');
 
         $statement->bindParam('articleId', $articleId, PDO::PARAM_INT);
+
+        $statement->execute();
+    } catch (PDOException $e) {
+        die("No es pot establir connexió amb la base de dades");
+    }
+}
+
+function deleteUser($user)
+{
+    try {
+        $connexio = getConnection();
+
+        $statement = $connexio->prepare('DELETE FROM users WHERE id = :userId');
+
+        $statement->bindParam('userId', $user, PDO::PARAM_INT);
 
         $statement->execute();
     } catch (PDOException $e) {

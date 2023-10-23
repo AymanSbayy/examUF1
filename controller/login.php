@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
     onSubmit();
 }
 
-require_once '../view/login.view.php';
+include '../view/login.view.php'; //EX2
 
 function onSubmit()
 {
@@ -35,8 +35,10 @@ function onSubmit()
     if (empty($errors))
         login($email, $keepSession);
 
-    if (isset($_SESSION["loginTries"]))
+    if (isset($_SESSION["loginTries"])){
         $_SESSION["loginTries"]++;
+        ini_set( "session.gc_maxlifetime", 900); //EX9
+    }
         else $_SESSION["loginTries"] = 1;
 }
 
@@ -63,10 +65,13 @@ function checkUserInput($email, $password)
         return;
     }
 
-    $md5Hash = md5($password);
-    $md5HashDB = getUserHash($email);
 
-    if ($md5Hash != $md5HashDB) {
+    //EX11
+    //$md5Hash = md5($password);
+    //$md5HashDB = getUserHash($email);
+    $contradb = getUserHash($email);
+    
+    if (password_verify($password, $contradb)) {
         $errors['password'] = "Wrong password.";
         return;
     }

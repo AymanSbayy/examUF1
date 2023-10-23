@@ -20,6 +20,7 @@
               class="bi bi-house-fill me-2"></i><span class="icon-home"></span>Home</a>
         </li>
         <li class="nav-item dropdown rounded">
+          <!-- EX5, EX6 -->
           <?php
           if ($anonUser)
             echo <<<STR
@@ -35,10 +36,12 @@
                 <li><a class="dropdown-item $createActive" href="edit.php"><span class="icon-plus"></span> New post</a></li>
                 <li><a class="dropdown-item $passwordActive $changePasswordVisibility" href="change-password.php"><span class="icon-key"></span> Change password</a></li>
                 <li><a class="dropdown-item " href="recovery-password.php"><span class="icon-key"></span> Recovery password</a></li>
+                <li><a class="dropdown-item " href=""><span class="icon-key"></span>List all</a></li> 
                 <div class="dropdown-divider"></div>
                 <li><a class="dropdown-item" href="clear-session.php"><span class="icon-logout"></span> Log out</a></li>
+                <li><a class="dropdown-item" href="deleteuser.php"><span class="icon-logout"></span>Donarse de Baixa</a></li>
                 STR;
-
+          //EX5
           ?>
       </ul>
       </li>

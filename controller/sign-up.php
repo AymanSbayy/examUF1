@@ -24,7 +24,7 @@ if(isset($_POST['email'])) {
     signup($email, $nickname, $password1, $password2);
 }
 
-require_once '../view/sign-up.view.php';
+include '../view/sign-up.view.php'; //EX2
 
 // Funcions
 
@@ -46,7 +46,7 @@ function signup($email, $nickname, $password1, $password2) {
 
     if (!empty($errors)) return;
 
-    $md5Hash = md5($password1);
+    $md5Hash = password_hash($password1, PASSWORD_DEFAULT); //EX5
     insertNewUser($email, $nickname, $md5Hash);
     startSession($email, true);
     redirectHome();

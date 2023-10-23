@@ -20,7 +20,7 @@
 	<!-- Navbar -->
 	<?php require_once '../controller/navbar.php' ?>
 	<header class="row m-4 text-center">
-		<h3>
+		<h3><!-- EX12 -->
 			<a style="color: black;" href="index.php">
 				<?php
 					if (empty($searchTerm)) {
@@ -130,9 +130,9 @@
 			<div class="row justify-content-center <?php echo empty($articles) ? "d-none" : "" ?>">
 				<div class="col-md-2 col-6">
 					<!-- Desplegable pels articles per pàgina -->
-					<form action="index.php" method="post" class="text-center">
+					<form action="index.php" method="get" class="text-center">
 						<label for="postsPerPage">Posts per page: </label>
-						<select class="form-select " name="postsPerPage" onchange="this.form.submit()">
+						<select class="form-select" id="postsxpage" name="postsPerPage" onchange="this.form.submit()"> <!-- EX7.1 -->
 							<option <?php echo $postsPerPage == 10 ? 'selected' : '' ?> value="10">10</option>
 							<option <?php echo $postsPerPage == 15 ? 'selected' : '' ?> value="15">15</option>
 							<option <?php echo $postsPerPage == 20 ? 'selected' : '' ?> value="20">20</option>
@@ -140,10 +140,10 @@
 					</form>
 				</div>
 				<div class="col-md-2 col-6">
-					<!-- Desplegable pel mètode d'ordenació dels articles -->
-					<form action="index.php" method="post" class="text-center">
+					<!-- Desplegable pel mètode d'ordenació dels articles --> <!-- EX7.2 -->
+					<form action="index.php" method="get" class="text-center" 
 						<label for="orderBy">Order by: </label>
-						<select class="form-select " name="orderBy" onchange="this.form.submit()">
+						<select class="form-select" id="ordre" name="orderBy" onchange="this.form.submit()">
 							<option <?php echo $orderBy == 'date-desc' ? 'selected' : '' ?> value="date-desc">Date (desc)</option>
 							<option <?php echo $orderBy == 'date-asc' ? 'selected' : '' ?> value="date-asc">Date (asc)</option>
 							<option <?php echo $orderBy == 'title-asc' ? 'selected' : '' ?> value="title-asc">Alphabetically (asc)</option>
