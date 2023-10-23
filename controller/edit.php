@@ -2,6 +2,7 @@
 
 require_once '../model/pdo-articles.php';
 require_once '../controller/input-common.php';
+//Eliminat requiere
 require_once '../controller/session.php';
 
 $errors = [];
